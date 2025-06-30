@@ -2,10 +2,9 @@
 
 import Link from 'next/link';
 import css from './TagsMenu.module.css';
-import { Tag } from '@/types/note';
 import { useState } from 'react';
 
-const tags: Tag[] = ['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
+const tags = ['All', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopping'];
 
 const TagsMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,29 +13,26 @@ const TagsMenu = () => {
     setIsMenuOpen(prevState => !prevState);
   };
 
+  const handleTagClick = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <div>
-      <div className={css.menuContainer}>
-        <button className={css.menuButton} onClick={toggleMenu}>
-          Notes ▾
-        </button>
-        {isMenuOpen && (
-          <ul className={css.menuList}>
-            {/* <li className={css.menuItem}>
-              <Link href={`/notes/filter/all`} className={css.menuLink}>
-                All notes
+    <div className={css.menuContainer}>
+      <button className={css.menuButton} onClick={toggleMenu}>
+        Notes ▾
+      </button>
+      {isMenuOpen && (
+        <ul className={css.menuList}>
+          {tags.map(tag => (
+            <li key={tag} className={css.menuItem}>
+              <Link href={`/notes/filter/${tag}`} onClick={handleTagClick} className={css.menuLink}>
+                {tag}
               </Link>
-            </li> */}
-            {tags.map(tag => (
-              <li key={tag} className={css.menuItem}>
-                <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
-                  {tag}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

@@ -6,7 +6,9 @@ import { useParams, useRouter } from 'next/navigation';
 import css from './NotePreview.module.css';
 import Modal from '@/components/Modal/Modal';
 
-const NotePreviewClient = () => {
+type NotePreviewClientProps = unknown;
+
+const NotePreviewClient: React.FC<NotePreviewClientProps> = () => {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
@@ -16,7 +18,7 @@ const NotePreviewClient = () => {
     error,
   } = useQuery({
     queryKey: ['note', id],
-    queryFn: () => fetchNoteById(id),
+    queryFn: () => fetchNoteById(Number(id)),
     refetchOnMount: false,
   });
 

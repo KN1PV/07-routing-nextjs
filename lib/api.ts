@@ -54,7 +54,7 @@ export const deleteNote = async (noteId: number): Promise<Note> => {
   return response.data;
 };
 
-export const fetchNoteById = async (noteId: string): Promise<Note> => {
+export const fetchNoteById = async (noteId: number): Promise<Note> => {
   const response = await axios.get<Note>(`${API_URL}/${noteId}`, {
       headers: {
           Authorization: `Bearer ${API_KEY}`
