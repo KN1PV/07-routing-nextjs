@@ -6,9 +6,7 @@ import { useParams, useRouter } from 'next/navigation';
 import css from './NotePreview.module.css';
 import Modal from '@/components/Modal/Modal';
 
-type NotePreviewClientProps = unknown;
-
-const NotePreviewClient: React.FC<NotePreviewClientProps> = () => {
+const NotePreviewClient = () => {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
 
@@ -44,6 +42,7 @@ const NotePreviewClient: React.FC<NotePreviewClientProps> = () => {
               <button className={css.editBtn}>Edit note</button>
             </div>
             <p className={css.content}>{note.content}</p>
+            {note.tag && <p className={css.tag}>Tag: {note.tag}</p>}
             <p className={css.date}>{note.createdAt}</p>
           </div>
         )}
